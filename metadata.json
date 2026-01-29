@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Copy of O B of Copy of Copy of ORIGINAL",
+  "description": "An interactive tactical board for football coaches and enthusiasts to create and visualize strategies, formations, and player movements.",
+  "requestFramePermissions": [
+    "display-capture",
+    "microphone"
+  ]
+}

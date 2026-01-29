@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Football Tactical Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            screens: {
+              'xs': '400px',
+            },
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              'brand-dark': '#F1F5F9',       
+              'brand-darker': '#FFFFFF',      
+              'brand-light': '#E2E8F0',       
+              'brand-accent': '#FBBF24',      
+              'brand-text': '#0F172A',         
+              'brand-subtext': '#64748B',    
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      :root {
+        --sat: env(safe-area-inset-top);
+        --sar: env(safe-area-inset-right);
+        --sab: env(safe-area-inset-bottom);
+        --sal: env(safe-area-inset-left);
+      }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        touch-action: manipulation;
+        overflow-x: hidden;
+        width: 100%;
+        background-color: #F1F5F9;
+      }
+      
+      #root {
+        min-height: 100%;
+        width: 100%;
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      @keyframes pulse {
+        50% { opacity: 0.6; }
+      }
+      
+      .player-element.is-selected {
+        box-shadow: 0 0 0 2px #FBBF24;
+      }
+
+      .player-element.is-selected::before {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        border-top-color: #FBBF24; 
+        border-left-color: #FBBF24; 
+        animation: spin 1.5s linear infinite, pulse 2.5s ease-in-out infinite;
+      }
+      
+      .player-element.is-source {
+        box-shadow: 0 0 0 3px #38BDF8;
+      }
+
+      .player-element.has-ball {
+        filter: drop-shadow(0 0 6px #FBBF24);
+      }
+      
+      .pass-line-animation {
+        animation: drawLine 0.4s ease-out forwards;
+      }
+      
+      @keyframes drawLine {
+        from { stroke-dashoffset: 100; opacity: 0; }
+        to { stroke-dashoffset: 0; opacity: 0.9; }
+      }
+
+      /* Scroll Reveal Classes */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, opacity;
+      }
+
+      .reveal-on-scroll.revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hero Title Constant Animation */
+      @keyframes heroFloat {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-10px) scale(1.02); }
+      }
+      .animate-hero-float {
+        animation: heroFloat 6s ease-in-out infinite;
+        display: inline-block;
+      }
+
+      /* Native-like input fixes for mobile */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Mobile Tweak: Ensure touch interactions don't trigger long-press menus on pitch */
+      .player-element, .pitch-container {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.7"
+  }
+}
+</script>
+</head>
+  <body class="bg-brand-dark font-sans">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
